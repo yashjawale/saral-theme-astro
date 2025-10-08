@@ -63,18 +63,22 @@ import LogoSVG from '../assets/logo.svg'
 	</nav>
 
 	<script>
-		function toggleNav() {
-			document
-				.querySelector('#mobile-menu')
-				?.classList.toggle('mobile-nav-open')
+		function setupNav() {
+			const openBtn = document.querySelector('#nav-open-btn')
+			const closeBtn = document.querySelector('#nav-close-btn')
+
+			function toggleNav() {
+				document
+					.querySelector('#mobile-menu')
+					?.classList.toggle('mobile-nav-open')
+			}
+
+			openBtn?.addEventListener('click', toggleNav)
+			closeBtn?.addEventListener('click', toggleNav)
 		}
 
-		document
-			.querySelector('#nav-open-btn')
-			?.addEventListener('click', toggleNav)
-		document
-			.querySelector('#nav-close-btn')
-			?.addEventListener('click', toggleNav)
+		setupNav()
+		document.addEventListener('astro:page-load', setupNav)
 	</script>
 </header>
 
@@ -135,5 +139,28 @@ import LogoSVG from '../assets/logo.svg'
 	window.addEventListener('DOMContentLoaded', () => {
 		addThemeEventListeners()
 		reComputeTheme()
+	})
+
+	// Apply theme before view transition starts (prevents flash)
+	document.addEventListener('astro:before-swap', (event) => {
+		// Apply the theme to the new document before it's swapped in
+		if (
+			localStorage.theme === 'dark' ||
+			(!('theme' in localStorage) &&
+				window.matchMedia('(prefers-color-scheme: dark)').matches)
+		) {
+			event.newDocument.documentElement.classList.add('dark')
+		} else {
+			event.newDocument.documentElement.classList.remove('dark')
+		}
+	})
+
+	// Re-run after swap to ensure theme buttons are correctly styled
+	document.addEventListener('astro:after-swap', () => {
+		reComputeTheme()
+	})
+
+	document.addEventListener('astro:page-load', () => {
+		addThemeEventListeners()
 	})
 </script>

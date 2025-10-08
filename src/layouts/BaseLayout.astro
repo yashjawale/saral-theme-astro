@@ -24,6 +24,18 @@ import '@fontsource-variable/jetbrains-mono'
 			description={description || SITE_DESCRIPTION}
 		/>
 		<ViewTransitions />
+		<script is:inline>
+			// Apply theme immediately, before any rendering
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+		</script>
 	</head>
 	<body
 		class="text-foreground bg-background font-light dark:text-foreground-dark dark:bg-background-dark transition-colors"
