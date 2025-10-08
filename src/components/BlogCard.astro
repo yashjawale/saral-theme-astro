@@ -23,6 +23,7 @@ const coverImagePath = `/src/assets/blogimages/${post.slug}/cover.jpg`
 				src={blogImages[coverImagePath]()}
 				alt={post.data.title}
 				class="object-cover rounded-xl aspect-video"
+				transition:name={`blog-cover-${post.slug}`}
 			/>
 		)
 	}
