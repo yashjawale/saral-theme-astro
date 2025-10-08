@@ -83,84 +83,57 @@ import LogoSVG from '../assets/logo.svg'
 </header>
 
 <script is:inline>
-	function reComputeTheme() {
-		if (
+	function applyTheme() {
+		const isDark =
 			localStorage.theme === 'dark' ||
 			(!('theme' in localStorage) &&
 				window.matchMedia('(prefers-color-scheme: dark)').matches)
-		) {
-			document.documentElement.classList.add('dark')
-		} else {
-			document.documentElement.classList.remove('dark')
-		}
+
+		document.documentElement.classList.toggle('dark', isDark)
 
 		const theme = localStorage.theme || 'auto'
-		document
-			.querySelectorAll(`[data-theme="theme-${theme}"]`)
-			.forEach((el) => el.classList.add('active'))
+		document.querySelectorAll('.theme-button').forEach((el) => {
+			el.classList.toggle('active', el.dataset.theme === `theme-${theme}`)
+		})
 	}
 
-	function addThemeEventListeners() {
-		themeButtons = document.querySelectorAll('.theme-button')
-		themeButtons.forEach((button) => {
+	function setupThemeListeners() {
+		document.querySelectorAll('.theme-button').forEach((button) => {
 			button.addEventListener('click', () => {
-				themeButtons.forEach((btn) => btn.classList.remove('active'))
-				button.classList.add('active')
-				if (button.dataset.theme === 'theme-auto') {
+				const theme = button.dataset.theme.replace('theme-', '')
+
+				if (theme === 'auto') {
 					localStorage.removeItem('theme')
-					reComputeTheme()
 				} else {
-					localStorage.theme = button.dataset.theme.replace('theme-', '')
-					document.documentElement.classList.toggle(
-						'dark',
-						button.dataset.theme === 'theme-dark'
-					)
+					localStorage.theme = theme
 				}
+
+				applyTheme()
 			})
 		})
 	}
 
-	// Set active class on OS theme change
-	window
-		.matchMedia('(prefers-color-scheme: dark)')
-		.addEventListener('change', (_e) => {
-			reComputeTheme()
-		})
+	function init() {
+		setupThemeListeners()
+		applyTheme()
+	}
 
-	// run recomputeTheme when screen crosses 768px
-	window.matchMedia('(min-width: 768px)').addEventListener('change', (_e) => {
-		addThemeEventListeners()
-		reComputeTheme()
-	})
+	// Initial setup
+	init()
 
-	reComputeTheme()
-
-	// Run on page load
-	window.addEventListener('DOMContentLoaded', () => {
-		addThemeEventListeners()
-		reComputeTheme()
-	})
-
-	// Apply theme before view transition starts (prevents flash)
+	// View transitions support
 	document.addEventListener('astro:before-swap', (event) => {
-		// Apply the theme to the new document before it's swapped in
-		if (
+		const isDark =
 			localStorage.theme === 'dark' ||
 			(!('theme' in localStorage) &&
 				window.matchMedia('(prefers-color-scheme: dark)').matches)
-		) {
-			event.newDocument.documentElement.classList.add('dark')
-		} else {
-			event.newDocument.documentElement.classList.remove('dark')
-		}
+		event.newDocument.documentElement.classList.toggle('dark', isDark)
 	})
 
-	// Re-run after swap to ensure theme buttons are correctly styled
-	document.addEventListener('astro:after-swap', () => {
-		reComputeTheme()
-	})
+	document.addEventListener('astro:page-load', init)
 
-	document.addEventListener('astro:page-load', () => {
-		addThemeEventListeners()
-	})
+	// OS theme change listener
+	window
+		.matchMedia('(prefers-color-scheme: dark)')
+		.addEventListener('change', applyTheme)
 </script>
