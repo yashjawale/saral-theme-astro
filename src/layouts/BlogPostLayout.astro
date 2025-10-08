@@ -96,6 +96,7 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 										src={blogImages[coverImagePath]()}
 										alt={title}
 										class="rounded-lg"
+										transition:name={`blog-cover-${slug}`}
 									/>
 									{coverImageCredit && (
 										<p class="mt-2 mb-8 opacity-80 italic text-sm">

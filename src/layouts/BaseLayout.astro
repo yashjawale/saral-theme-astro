@@ -3,6 +3,7 @@ import BaseHead from '../components/BaseHead.astro'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts'
+import { ViewTransitions } from 'astro:transitions'
 
 interface Props {
 	title?: string
@@ -22,6 +23,19 @@ import '@fontsource-variable/jetbrains-mono'
 			title={title || SITE_TITLE}
 			description={description || SITE_DESCRIPTION}
 		/>
+		<ViewTransitions />
+		<script is:inline>
+			// Apply theme immediately, before any rendering
+			if (
+				localStorage.theme === 'dark' ||
+				(!('theme' in localStorage) &&
+					window.matchMedia('(prefers-color-scheme: dark)').matches)
+			) {
+				document.documentElement.classList.add('dark')
+			} else {
+				document.documentElement.classList.remove('dark')
+			}
+		</script>
 	</head>
 	<body
 		class="text-foreground bg-background font-light dark:text-foreground-dark dark:bg-background-dark transition-colors"

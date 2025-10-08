@@ -48,3 +48,17 @@ html {
 .prose iframe {
 	@apply my-16 mx-auto w-11/12 aspect-video rounded-xl;
 }
+
+/* View transitions */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation-duration: 0.2s;
+}
+
+@media (prefers-reduced-motion) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}
