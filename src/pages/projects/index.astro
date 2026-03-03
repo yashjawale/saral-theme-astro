@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import ProjectsFilter from '@/components/react/ProjectsFilter'
+---
+
+<BaseLayout>
+	<main
+		class="app-container flex flex-col gap-12 justify-center py-36 md:py-48 pt-44 md:pt-56 relative"
+	>
+		<div>
+			<h1 class="text-5xl font-bold leading-none">Projects</h1>
+		</div>
+		<p class="text-xl max-w-2xl font-light leading-normal">Recent Projects</p>
+
+		<ProjectsFilter client:load />
+	</main>
+</BaseLayout>
