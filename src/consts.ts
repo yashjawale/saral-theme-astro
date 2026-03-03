@@ -36,7 +36,7 @@ export const WebsiteLinks = [
 	},
 	{
 		name: 'Projects',
-		url: '/projects',
+		url: 'projects',
 	},
 	{
 		name: 'Blog',
