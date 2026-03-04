@@ -22,13 +22,11 @@ export default function ProjectCard({ project }: Props) {
 
 				{/* Tech Stack */}
 				<div className="flex text-xs gap-2 absolute bottom-5 mt-10">
-					{project.stack.map((stack) => {
-						return (
-							<span className="px-2 py-1 rounded-tl-lg font-medium rounded-br-lg bg-primary text-white">
-								{stack}
-							</span>
-						)
-					})}
+					{project.stack.map((stack) => (
+						<span className="px-2 py-1 rounded-tl-lg font-medium rounded-br-lg bg-primary text-white">
+							{stack}
+						</span>
+					))}
 				</div>
 
 				<div className="flex flex-row gap-1 absolute top-5 right-4">
