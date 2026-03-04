@@ -1,11 +1,14 @@
 {
 	"extends": "astro/tsconfigs/strict",
 	"compilerOptions": {
+		"ignoreDeprecations": "6.0",
 		"strictNullChecks": true,
 		"baseUrl": ".",
 		"paths": {
 			"@/*": ["src/*"],
 			"@blogimages/*": ["src/assets/blogimages/*"]
-		}
+		},
+		"jsx": "react-jsx",
+		"jsxImportSource": "react"
 	}
 }
