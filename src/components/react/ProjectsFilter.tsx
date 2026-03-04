@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react'
-import { type ProjType, type Project } from '@/@types/Project'
-
-import { ProjTypes } from '@/@types/Project'
+import { ProjTypes, type ProjType, type Project } from '@/@types/Project'
 import { Projects } from '@/data/projects'
 
 // components
