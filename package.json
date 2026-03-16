@@ -23,7 +23,7 @@
 		"@fontsource/silkscreen": "^5.0.18",
 		"@iconify-json/mdi": "^1.1.66",
 		"@tailwindcss/vite": "^4.1.12",
-		"astro": "^5.13.7",
+		"astro": "^6.0.5",
 		"astro-icon": "^1.1.0",
 		"dayjs": "^1.11.13",
 		"mdast-util-to-string": "^4.0.0",
