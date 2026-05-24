@@ -5,7 +5,7 @@ import { Icon } from 'astro-icon/components'
 import BlogCard from '../components/BlogCard.astro'
 import { getCollection } from 'astro:content'
 
-const posts = (await getCollection('blog'))
+const posts = (await getCollection('blogs'))
 	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
 	.slice(0, 4)
 ---

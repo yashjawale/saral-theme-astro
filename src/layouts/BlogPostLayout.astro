@@ -8,7 +8,7 @@ import utc from 'dayjs/plugin/utc'
 
 dayjs.extend(utc)
 
-type Props = CollectionEntry<'blog'>['data'] & {
+type Props = CollectionEntry<'blogs'>['data'] & {
 	headings: MarkdownHeading[]
 	slug: string
 	remarkPluginFrontmatter: Record<string, string>
