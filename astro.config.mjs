@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config'
+import { unified } from '@astrojs/markdown-remark'
 import tailwindcss from '@tailwindcss/vite'
 import mdx from '@astrojs/mdx'
 import sitemap from '@astrojs/sitemap'
@@ -22,12 +23,12 @@ export default defineConfig({
 				forward: ['dataLayer.push'],
 			},
 		}),
+		unified({
+			remarkPlugins: [remarkReadingTime, remarkModifiedTime],
+			rehypePlugins: [rehypeFigureTitle, rehypeAccessibleEmojis],
+		}),
 	],
 	vite: {
 		plugins: [tailwindcss()],
-	},
-	markdown: {
-		remarkPlugins: [remarkReadingTime, remarkModifiedTime],
-		rehypePlugins: [rehypeFigureTitle, rehypeAccessibleEmojis],
 	},
 })
