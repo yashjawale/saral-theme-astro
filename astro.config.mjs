@@ -23,11 +23,13 @@ export default defineConfig({
 				forward: ['dataLayer.push'],
 			},
 		}),
-		unified({
+	],
+	markdown: {
+		processor: unified({
 			remarkPlugins: [remarkReadingTime, remarkModifiedTime],
 			rehypePlugins: [rehypeFigureTitle, rehypeAccessibleEmojis],
 		}),
-	],
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},
