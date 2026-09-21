@@ -58,10 +58,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 						</h1>
 						<div class="text-lg flex items-center gap-4 flex-wrap py-8">
 							<!-- Publish date -->
-							<span>
+							<span class="inline-flex items-center gap-1.5">
 								<Icon
 									name="mdi:calendar-month-outline"
-									class="inline-block text-primary dark:text-primary-dark"
+									class="text-primary dark:text-primary-dark"
 								/>
 								<FormattedDate date={pubDate} />
 							</span>
@@ -69,10 +69,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 							<!-- Updated date -->
 							{
 								updatedDate && (
-									<span>
+									<span class="inline-flex items-center gap-1.5">
 										<Icon
 											name="mdi:calendar-refresh-outline"
-											class="inline-block text-primary dark:text-primary-dark"
+											class="text-primary dark:text-primary-dark"
 										/>
 										Last updated on <FormattedDate date={updatedDate} />
 									</span>
@@ -80,10 +80,10 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 							}
 
 							<!-- Read time -->
-							<span>
+							<span class="inline-flex items-center gap-1.5">
 								<Icon
 									name="mdi:clock-time-four-outline"
-									class="inline-block text-primary dark:text-primary-dark"
+									class="text-primary dark:text-primary-dark"
 								/>
 								{remarkPluginFrontmatter.minutesRead}
 							</span>
@@ -118,8 +118,8 @@ const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
 							href={`https://github.com/yashjawale/yashjawale.github.io/edit/main/src/content/blog/${slug}.md`}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="hover:underline underline-offset-4 opacity-70 hover:opacity-100"
-							><Icon name="mdi:pencil-outline" class="inline-block" />
+							class="hover:underline underline-offset-4 opacity-70 hover:opacity-100 inline-flex items-center gap-1.5"
+							><Icon name="mdi:pencil-outline" />
 							Suggest an edit
 						</a>
 						<p class="opacity-70">
